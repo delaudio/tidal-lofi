@@ -2,7 +2,7 @@
 
 import Sound.Tidal.Context
 
-time = 84 :: Pattern Double
+time = 120 :: Pattern Double
 
 n64 = (60 / time) / 16 :: Pattern Double
 
