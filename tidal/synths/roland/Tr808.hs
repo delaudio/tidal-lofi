@@ -1,0 +1,27 @@
+-- TR-808:
+--   7: KIT LEVEL
+--   9: SHUFFLE
+--  20: BD TUNE
+--  21: BD TONE
+--  23: BD DECAY
+--  24: BD LEVEL
+--  25: SD TONE
+--  26: SD SNAPPY
+--  29: SD LEVEL
+--  46: LT/LC TUNING
+--  48: LT/LC LEVEL
+--  49: MT/MC TUNING
+--  51: MT/MC LEVEL
+--  52: HT/HC TUNING
+--  54: HT/HC LEVEL
+--  57: RS/CL LEVEL
+--  60: CP/MA LEVEL
+--  63: CH LEVEL
+--  71: ACCENT LEVEL
+--  81: OH DECAY
+--  82: OH LEVEL
+--  83: CY TONE
+--  84: CY DECAY
+--  85: CY LEVEL
+--  86: CB TUNE
+--  88: CB LEVEL
