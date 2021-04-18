@@ -77,6 +77,7 @@ let getState = streamGet tidal
 :script ./tidal/Times.hs
 :script ./tidal/patterns/Kicks.hs
 :script ./tidal/patterns/Snares.hs
+:script ./tidal/harmony/Chords.hs
 
 :set prompt "tidal> "
 :set prompt-cont ""
