@@ -75,9 +75,16 @@ let getState = streamGet tidal
 :}
 
 :script ./tidal/Times.hs
+:script ./tidal/Instruments.hs
 :script ./tidal/patterns/Kicks.hs
 :script ./tidal/patterns/Snares.hs
-:script ./tidal/harmony/Chords.hs
+:script ./tidal/patterns/Drums/Drums001.hs
+:script ./tidal/patterns/Leads/Leads001.hs
+:script ./tidal/patterns/Chords/Chords001.hs
+:script ./tidal/patterns/Basslines/Basslines001.hs
+:script ./tidal/patterns/Arps/Arps001.hs
+-- :script ./tidal/harmony/Chords.hs
+-- :script ./tidal/Utils.hs
 
 :set prompt "tidal> "
 :set prompt-cont ""
