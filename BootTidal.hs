@@ -6,6 +6,10 @@ import Sound.Tidal.Context
 import System.IO (hSetEncoding, stdout, utf8)
 hSetEncoding stdout utf8
 
+-- let vstTarget = Target {oName = "hydra", oAddress = "127.0.0.1", oHandshake = True, oPort = 3337, oBusPort = Just 3338, oLatency = 0.1, oSchedule = Pre BundleStamp, oWindow = Nothing}
+
+-- tidal <- startStream (defaultConfig {cFrameTimespan = 1/20}) [(superdirtTarget {oLatency = 0.1}, [superdirtShape]),(vstTarget, [superdirtShape]) ]
+
 -- total latency = oLatency + cFrameTimespan
 tidal <- startTidal (superdirtTarget {oLatency = 0.1, oAddress = "127.0.0.1", oPort = 57120}) (defaultConfig {cVerbose = True, cFrameTimespan = 1/20})
 
@@ -83,6 +87,7 @@ let getState = streamGet tidal
 :script ./tidal/patterns/Chords/Chords001.hs
 :script ./tidal/patterns/Basslines/Basslines001.hs
 :script ./tidal/patterns/Arps/Arps001.hs
+-- :script ./tidal/newFunctions.hs
 -- :script ./tidal/harmony/Chords.hs
 -- :script ./tidal/Utils.hs
 
