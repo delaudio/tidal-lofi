@@ -1,0 +1,21 @@
+time = 169
+
+setcps (time / 60 / 4)
+
+drums00A = n "gs3*8" # s "midi" # midichan 0 # sustain n8 # amp 0.6
+
+drums00B = stack [n "c3 [~ c3] [~ ~ <c3 ~> ~] [~]" # s "midi", n "gs3*8" # s "midi"]
+  # midichan 0 # sustain n8 # amp 0.6
+
+d1 $
+  stack
+    [ -- superberry001,
+      -- drums00A,
+      -- tr606 [drums001],
+      trunc 0.125 $ juno106 [chords001]
+      -- arps001,
+      -- dx7[bassline001]
+    ]
+
+hush
+

@@ -1,0 +1,35 @@
+time = 124
+
+setcps (time / 60 / 4)
+
+ostinato = n "[g3 d4 a4 ~][f4 c5 ~ g4][d5 ~ f4 c5][~ d4 a4 ~]" # s "midi" # amp "0.9" # midichan 1 # sustain n16
+
+bassline = n "[[g3 ~ ~ [~ g3]][~ ~ [~ ~ ~ g3] [~ d4]][a3 ~ ~ [~ c4]][[~ a4] [g5 ~ ~ g3] [~ bf3] [~ g4 ~ ~]]]/4" # s "midi" # gain "0.9" # midichan 2 # sustain n8
+
+stab = n "[[g3 d4 a4 ~][f4 c5 ~ g4][g3 d4 a4 ~][f4 c5 ~ g4]]/2" # s "midi" # gain "0.9" # midichan 3 # sustain n16
+
+melody = n "[[~][~][~][[~][g5][d6][es6 c6]]]/4" # s "midi" # gain "0.9" # midichan 4 # sustain n8
+
+-- 16 bars
+
+d1 $
+  stack
+    [ stack
+        [ n "[c3*4]" # amp "0.9",
+          n "[~ <ds3 <ds3 [[ds3 ds3*2] <~ [ds3 ~ ds3 ~]>]>>]" # amp "1",
+          n "[fs3 <fs3 fs3*2> ~ fs3][~ fs3 ~ gs3]",
+          n "[[~ as3] as3 ~ as3]" # amp "0.2 0.2 0 0.4"
+        ]
+        # sustain n16
+        # midichan 0,
+      stack
+        []
+    ]
+    -- bassline
+    -- ostinato
+    -- stab
+    -- melody
+
+    # sound "midi"
+
+hush

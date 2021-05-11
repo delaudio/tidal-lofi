@@ -1,0 +1,57 @@
+{-# LANGUAGE OverloadedStrings #-}
+
+import Sound.Tidal.Context
+
+sources = sound ""
+
+cymbals = sound ""
+
+snare = sound ""
+
+percussives = sound ""
+
+kick = sound ""
+
+bass = sound ""
+
+chords = sound ""
+
+saxophone = sound ""
+
+melodicFill = sound ""
+
+pad = sound ""
+
+lead = sound ""
+
+crushedSynth = sound ""
+
+vocal = sound ""
+
+mutedPicks = sound ""
+
+drumbus =
+  stack
+    [ sources,
+      cymbals,
+      snare,
+      percussives
+    ]
+
+kickbass =
+  stack
+    [ kick,
+      bass
+    ]
+
+synthbus =
+  stack
+    [ chords,
+      saxophone,
+      melodicFill,
+      pad,
+      lead,
+      crushedSynth,
+      vocal,
+      mutedPicks
+    ]

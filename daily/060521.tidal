@@ -1,0 +1,53 @@
+time = 169
+
+setcps (time / 60 / 4)
+
+d1 $ chop "<16 128 32>" $ sound "breaks125"
+
+d1 $ sound "breaks125"
+
+d1 $ loopAt 1 $ s "breaks125"
+
+d1 $ loopAt 1 $ slice 8 "0 < 1 [4 <4 3>]> 2 3 4 <5 [2 3]> 5 <7 [4 4] <[4 4 4 4] [4 4 4 [4 5 4 5]]>>" $ sound "breaks125" # legato 1
+
+d1 $ loopAt 1 $ slice 8 "0..7" $ sound "breaks125" # legato 1
+
+d1 $
+  stack
+    [ loopAt 1 $ slice 8 "0 < 1 [4 <4 3>]> 2 3 4 5 5 7" $ sound "breaks125" # legato 1
+    -- loopAt 1 $ slice 8 "0..7" $ sound "breaks125" # legato 1
+    -- loopAt 1 $ slice 8 "0!8" $ sound "breaks125" # legato 1
+    -- n (scale "minor" "[0] [c'min7 ~ c'min7 c'min7] ~ [0 ~ c'min7 ~]") + "c4" # sound "midi" # midichan "0" # gain 0.8
+    -- slow 4 $ n ((scale "minor" "[0] [c4'min9 ~ c4'min9 c4'min9] ~ [0 ~ <c4'min9 c4'min> ~]") + "c4") # sound "midi" # midichan "0" # gain 0.8
+    -- slow 4 $ n "c6 a5 f5 [g5 ~ [~ g5] ~]" # sound "superpiano" # gain 0.8 # sustain (n8+n16)
+    ]
+
+hush
+
+n128 = (60 / time) / 4 :: Pattern Double
+
+print n128
+
+d1 $ loopAt 1 $ struct "t!8" $ slice 8 "0..7" $ sound "breaks125" # legato 1
+
+d1 $ loopAt 1 $ struct "t!8" $ slice 16 "4" $ sound "breaks125" # legato 1
+
+d1 $ loopAt 1 $ struct "t!16" $ slice 16 "4" $ sound "breaks125" # legato 1
+
+
+d1 $ loopAt 1 $ sound "breaks125" # legato 1
+
+d1 $
+  stack
+    [ loopAt 1 $ slice 8 "<0 [1 1] [2 4] [0 1]> < <[1] [2 4]> [4 <4 3>]> 2 3 4 <[5] [7 7] [0 1] ~> 5 <7 [5 2]>" $ sound "breaks125" # legato 1 # speed "1",
+      cat [
+        slow 1 $ n (scale "minor" "[0] [c'min7 ~ c'min7 c'min7] ~ [0 ~ c'min7 ~]" + "c4") # s "superhoover" # sustain n16,
+        slow 1 $ n (scale "minor" "[0] [a'min7 ~ a'min7 a'min7] ~ [0 ~ a'min7 ~]" + "c3") # s "superhoover" # sustain n16,
+        slow 1 $ n (scale "minor" "[0] [d'min7 ~ d'min7 d'min7] ~ [0 ~ ~ d'min7]" + "c4") # s "superhoover" # sustain n16,
+        slow 1 $ n (scale "minor" "[0] [g'min7 ~ g'min7 g'min7] ~ [0 g'min7 ~ g'min7]" + "c3") # s "superhoover" # sustain n16
+      ] # gain 0
+    ]
+
+d1 $ loopAt 4 $ struct "t!16" $ slice 16 "<[0..15][4..10][2..11] [<13*4 [5..8]> [8..15]]>" $ sound "0amen" # legato 1
+
+hush

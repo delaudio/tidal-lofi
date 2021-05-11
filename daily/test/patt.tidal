@@ -1,0 +1,15 @@
+-- franco micalizzi - la banda del gobbo
+
+time = 139
+
+setcps (time / 60 / 4)
+
+d1 $
+  stack
+    [ bass,
+      -- cat [fast 2 $ trunc 0.5 $ amen1, fast 2 (fast 2 $ trunc 0.25 $ amen1)]
+      amen2
+      -- amen1
+    ]
+
+hush

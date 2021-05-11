@@ -1,0 +1,73 @@
+-- caterina barbieri - this causes consciousness to fracture
+
+time = 80
+
+setcps (time / 60 / 4)
+
+resetCycles
+
+let pats =
+      [
+        ("a", stack [ n "f4 ds5 ~ c5 ~ ~ ~ cs5 ~ ~ ds5 ~ ~ as4 ~ ~ ~ gs4 f5 ~"
+                      # amp "0.7 0.72 0.0 0.72 0.0 0.0 0.0 0.72 0.0 0.0 0.72 0.0 0.0 0.7 0.0 0.0 0.0 0.7 0.72 0.0"
+                      # legato "1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0"
+                      # sustain (n32),
+                      n "~ ~ as4 ~ ~ ~ ~ ~ f4 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ as4"
+                      # amp "0.0 0.0 0.72 0.0 0.0 0.0 0.0 0.0 0.7 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.72"
+                      # legato "0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0"
+                      # sustain (n32),
+                      gain "1*16" # ccv (range 127 80 $ slow 8 saw) # ccn 3,
+                      gain "1*16" # ccv (range 0 127 $ slow 16 saw) # ccn 4,
+                      gain "1*16" # ccv (range 0 40 $ slow 8 saw) # ccn 5,
+                      gain "1*16" # ccv (range 0 50 $ slow 8 saw) # ccn 6
+                    ] # sound "midi" # midichan 0
+        ),
+        ("b", stack [ n "f4 ds5 ~ c5 ~ ~ ~ cs5 ~ ~ ds5 ~ ~ as4 ~ ~ ~ gs4 f5 ~"
+                      # amp "0.7 0.72 0.0 0.72 0.0 0.0 0.0 0.72 0.0 0.0 0.72 0.0 0.0 0.7 0.0 0.0 0.0 0.7 0.72 0.0"
+                      # legato "1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0"
+                      # sustain (n32),
+                      n "~ ~ as4 ~ ~ ~ ~ ~ f4 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ as4"
+                      # amp "0.0 0.0 0.72 0.0 0.0 0.0 0.0 0.0 0.7 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.72"
+                      # legato "0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0"
+                      # sustain (n32),
+                      ccv 127 # ccn 3,
+                      ccv 0 # ccn 4,
+                      ccv 0 # ccn 5,
+                      ccv 0 # ccn 6
+                    ] # sound "midi" # midichan 0
+        )
+      ]
+in
+d1 $ slow (5/4) $ ur 16 "b b a a a a b b" pats []
+
+hush
+
+d1 $ slow (5/4) $ stack [
+    n "f4 ds5 ~ c5 ~ ~ ~ cs5 ~ ~ ds5 ~ ~ as4 ~ ~ ~ gs4 f5 ~"
+    # amp "0.7 0.72 0.0 0.72 0.0 0.0 0.0 0.72 0.0 0.0 0.72 0.0 0.0 0.7 0.0 0.0 0.0 0.7 0.72 0.0"
+    # legato "1.0 1.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 1.0 0.0"
+    # sustain (n32),
+    n "~ ~ as4 ~ ~ ~ ~ ~ f4 ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ as4"
+    # amp "0.0 0.0 0.72 0.0 0.0 0.0 0.0 0.0 0.7 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.72"
+    # legato "0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 1.0"
+    # sustain (n32)
+] # sound "midi" # midichan 0
+
+p "mod" $ stack [
+  gain "1*16" # ccv (range 127 80 $ slow 16 saw) # ccn 3,
+  gain "1*16" # ccv (range 0 127 $ slow 16 saw) # ccn 4,
+  gain "1*16" # ccv (range 0 40 $ slow 16 saw) # ccn 5,
+  gain "1*16" # ccv (range 0 50 $ slow 16 saw) # ccn 6
+] # sound "midi" # midichan 0
+
+do
+  resetCycles
+  p "mod" silence
+  once $ stack [
+      ccv 127 # ccn 3,
+      ccv 0 # ccn 4,
+      ccv 0 # ccn 5,
+      ccv 0 # ccn 6
+    ] # sound "midi" # midichan 0
+
+resetCycles

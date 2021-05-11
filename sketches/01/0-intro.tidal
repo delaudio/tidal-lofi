@@ -1,5 +1,78 @@
--- noises
--- chords
--- vocals after 5th bar
--- hats after 5th bar
+{-# LANGUAGE OverloadedStrings #-}
 
+import Sound.Tidal.Context
+
+hush
+
+time = 120
+
+setcps (time / 60 / 4)
+
+d1 $ stack [
+  dsDrums [
+    fast 1 $ stack [ -- kick
+    -- slow 2 $ struct "[[t ~ t t] [t*2 ~ t t] [t ~ t t*2] [t ~ t ~]]" $ n "c3" # s "midi" # midichan 0,
+    struct "t!4" $ n "c3" # s "midi" # midichan 0,
+    ccv "40" # ccn 15 # s "midi" # midichan 0 -- overdrive
+    ],
+    fast 2 $ stack [ -- clap
+    -- slow 2 $ struct "[[t ~ t t] [t*2 ~ t t] [t ~ t t*2] [t ~ t ~]]" $ n "c3" # s "midi" # midichan 0,
+    struct "~ t" $ n "ds3" # s "midi" # midichan 0,
+    ccv "40" # ccn 15 # s "midi" # midichan 0 -- overdrive
+    ],
+  stack [ -- snare
+    struct "[[~ ~ <t t*2> ~]]" $ n "d3" # s "midi" # midichan 0 # amp 0.2,
+    -- slow 1 $ struct "[t ~ t ~] [~ t ~ t] t [t t ~ ~]" $ n "d3" # s "midi" # midichan 0 # amp 0.1,
+    gain "1*16"
+    # cat [
+      ccv (
+      range 30 120 $ cat [(slow 2 $ randcat [sine, saw, tri]), (slow 4 $ randcat [sine, saw, tri])]
+      ),
+      ccv (
+      range 50 70 $ cat [(slow 2 $ randcat [sine, saw, tri]), (slow 4 $ randcat [sine, saw, tri])]
+      )
+    ]
+    # ccn 32 # s "midi" # midichan 0, -- decay
+    gain "1*16" # ccv (range 30 60 $ slow 2 tri) # ccn 30 # s "midi" # midichan 0 -- tone
+    ] # amp 0.3,
+  fast 1 $ stack [ -- hats
+    -- slow 1 $ struct "[[t!6 [~] [t ~]][t*8][t*8][[t*2][t*2][t*2][t*8]]]" $ n "gs3" # s "midi" # midichan 0 # amp 0.1,
+    -- slow 1 $ struct "[t*16]" $ n "gs3" # s "midi" # midichan 0 # amp 0.1,
+    struct "t*16" $ n "gs3" # s "midi" # midichan 0,
+    ccv "40 50 20 30" # ccn 80 # s "midi" # midichan 0, -- pitch
+    gain "1*16" # cat [
+      -- ccv (range 120 80 $ slow 1 saw),
+      -- ccv (range 80 60 $ fast 1 saw),
+      -- ccv (range 60 20 $ fast 1 saw),
+      -- ccv (range 20 120 $ fast 1 saw)
+      ccv (range 40 80 $ fast 1 tri)
+      ] # ccn 81 # s "midi" # midichan 0 -- decay
+    ] # amp 0.4,
+  stack [ -- tom
+    slow 1 $ struct "[<[t][t ~ t t]> [~ t] t <[~ [t ~ t t] t ~]>]" $ n "g3" # s "midi" # midichan 0 # amp 0
+    ],
+  stack [ -- tom2
+    slow 1 $ struct "[[~ t] [~] [~ t] <[t t t ~] [t*2 t t ~]>]" $ n "as3" # s "midi" # midichan 0 # amp 0
+    ]
+  ],
+  sh101 [ -- sh101
+    -- n "<[g2] [g3 ~ g2 a3]>[f3][d3 d4] <[a3 ~ a4 g3] [a4 a3]>" # s "midi" # midichan 1 # sustain (randcat [(n16+n32)]) # amp 0
+   -- slow 1 $ n "[[g1 g1 g1 <g2 ~>] [<a1*2 a2> <~ a1> ~ a1] <[c3 ~ ~ c2] [c1 g1]> [f1 ~ f2 f1]]" # s "midi" # midichan 1 # sustain (cat [(n4+n32)]) # amp 0.2
+   slow 1 $ n "[[g1!4 c2 g1!3 g2 g1!2 c2 g1!2 <<~ g1> g1> <g2 g1>]]" # s "midi" # midichan 3 # sustain ( fast 16 $ cat [n16, randcat [n16, n8], (n16+n32), randcat[n8, n16]]) # amp 0.2
+    ] # amp 0,
+  superberry [ -- superberry
+    slow 1 $ stack [
+      -- n "[g2 d3 a3 ~][f3 c4 ~ g3][d4 ~ f3 c4][~ d3 a3 ~]" # s "midi" # midichan 2 # sustain n4
+      n ("[<g2'min7 c2'min7> ~ ~ <g2'min9 c2'min7>][~ c2'min7 ~ c2'min7][~ c2'min7 c2'min7 ~][~ c2'min7 ~ c2'min7]") # s "midi" # midichan 2 # sustain n32
+    ],
+    gain "1*16" # ccv (range 30 120 $ slow 2 sine) # ccn 14 # s "midi" # midichan 2, -- detune
+    gain "1*16" # ccv (range 30 60 $ slow 1 sine) # ccn 15 # s "midi" # midichan 2, -- mix
+    gain "1*16" # ccv (range 20 50 $ slow 4 sine) # ccn 17 # s "midi" # midichan 2, -- sub mix
+    ccv "64" # ccn 18 # s "midi" # midichan 2, -- octave 0
+    ccv "100" # ccn 16 # s "midi" # midichan 2 -- brightness
+  ] # amp 0.5
+]
+
+:info step
+
+hush
